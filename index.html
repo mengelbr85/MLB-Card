@@ -417,6 +417,9 @@
 // ── Pitcher Database ── Updated 2026-07-17 ──────────────────────────────────────
 // HR/9 = home runs allowed per 9 IP · MLB avg SP HR/9 (2026): 1.18
 // * = blended with prior estimate (IP < 40)
+// ── Pitcher Database ── Updated 2026-07-17 ──────────────────────────────────────
+// HR/9 = home runs allowed per 9 IP · MLB avg SP HR/9 (2026): 1.18
+// * = blended with prior estimate (IP < 40)
 const MLB_AVG_HR9 = 1.18; // 2026 MLB avg SP HR/9
 const PITCHERS = [
   // ARI
@@ -502,7 +505,7 @@ const PITCHERS = [
   {name:'Ronel Blanco', team:'HOU', hr9:0.95}, // stale
   {name:'Cristian Javier', team:'HOU', hr9:1.0}, // stale
   {name:'Peter Lambert', team:'HOU', hr9:1.15},
-  {name:'Hunter Brown', team:'HOU', hr9:1.24}, // *blended
+  {name:'Hunter Brown', team:'HOU', hr9:1.25}, // *blended
   {name:'Spencer Arrighetti', team:'HOU', hr9:1.32},
   {name:'Tatsuya Imai', team:'HOU', hr9:1.56},
   {name:'Lance McCullers Jr.', team:'HOU', hr9:1.6}, // *blended
@@ -516,7 +519,7 @@ const PITCHERS = [
   {name:'Patrick Sandoval', team:'LAA', hr9:0.85}, // stale
   {name:'José Soriano', team:'LAA', hr9:0.97},
   {name:'Reid Detmers', team:'LAA', hr9:1.1}, // stale
-  {name:'Grayson Rodriguez', team:'LAA', hr9:1.14}, // *blended
+  {name:'Grayson Rodriguez', team:'LAA', hr9:1.15}, // *blended
   {name:'Jack Kochanowicz', team:'LAA', hr9:1.2}, // stale
   {name:'Jose Suarez', team:'LAA', hr9:1.25}, // stale
   // LAD
@@ -578,7 +581,7 @@ const PITCHERS = [
   {name:'Braxton Ashcraft', team:'PIT', hr9:1.11},
   {name:'Mitch Keller', team:'PIT', hr9:1.13},
   {name:'Quinn Priester', team:'PIT', hr9:1.15}, // stale
-  {name:'Jared Jones', team:'PIT', hr9:1.26}, // *blended
+  {name:'Jared Jones', team:'PIT', hr9:1.27}, // *blended
   {name:'Marco Gonzales', team:'PIT', hr9:1.3}, // stale
   // SD
   {name:'Michael King', team:'SD', hr9:0.83},
@@ -623,27 +626,27 @@ const PITCHERS = [
   // TEX
   {name:'Cody Bradford', team:'TEX', hr9:1.05}, // stale
   {name:'Jon Gray', team:'TEX', hr9:1.15}, // stale
-  {name:'Kumar Rocker', team:'TEX', hr9:1.2},
+  {name:'Kumar Rocker', team:'TEX', hr9:1.2}, // stale
   {name:'Jack Leiter', team:'TEX', hr9:1.2}, // stale
-  {name:'Jacob deGrom', team:'TEX', hr9:1.43},
+  {name:'Jacob deGrom', team:'TEX', hr9:1.43}, // stale
   {name:'Andrew Heaney', team:'TEX', hr9:1.5}, // stale
-  {name:'Nathan Eovaldi', team:'TEX', hr9:1.54},
+  {name:'Nathan Eovaldi', team:'TEX', hr9:1.54}, // stale
   // TOR
-  {name:'Dylan Cease', team:'TOR', hr9:0.46},
-  {name:'Trey Yesavage', team:'TOR', hr9:0.84},
+  {name:'Dylan Cease', team:'TOR', hr9:0.46}, // stale
+  {name:'Trey Yesavage', team:'TOR', hr9:0.84}, // stale
   {name:'Yusei Kikuchi', team:'TOR', hr9:1.1}, // stale
   {name:'Chris Bassitt', team:'TOR', hr9:1.15}, // stale
-  {name:'Kevin Gausman', team:'TOR', hr9:1.2},
+  {name:'Kevin Gausman', team:'TOR', hr9:1.2}, // stale
   {name:'Jose Berrios', team:'TOR', hr9:1.25}, // stale
   {name:'Bowden Francis', team:'TOR', hr9:1.35}, // stale
   // WSH
-  {name:'Cade Cavalli', team:'WSH', hr9:0.73},
+  {name:'Cade Cavalli', team:'WSH', hr9:0.73}, // stale
   {name:'MacKenzie Gore', team:'WSH', hr9:1.0}, // stale
   {name:'Mitchell Parker', team:'WSH', hr9:1.1}, // stale
   {name:'Jake Irvin', team:'WSH', hr9:1.15}, // stale
   {name:'Trevor Williams', team:'WSH', hr9:1.25}, // stale
   {name:'Patrick Corbin', team:'WSH', hr9:1.6}, // stale
-  {name:'Zack Littell', team:'WSH', hr9:2.3},
+  {name:'Zack Littell', team:'WSH', hr9:2.3}, // stale
 ];
 
 // Populate pitcher dropdowns on page load
@@ -846,97 +849,8 @@ function buildSensitivitySection(s) {
   return html;
 }
 
-const TODAY_ODDS = {
-  "yankee": {
-    "away": "Los Angeles Dodgers",
-    "mktRuns": 9.0,
-    "impliedHR": 2.59,
-    "books": {
-      "FanDuel": 9.0,
-      "DraftKings": 9.0,
-      "BetMGM": 9.0
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "fenway": {
-    "away": "Tampa Bay Rays",
-    "mktRuns": 8.7,
-    "impliedHR": 2.29,
-    "books": {
-      "FanDuel": 9.0,
-      "DraftKings": 8.5,
-      "BetMGM": 8.5
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "wrigley": {
-    "away": "Minnesota Twins",
-    "mktRuns": 10.5,
-    "impliedHR": 2.9,
-    "books": {
-      "FanDuel": 10.5,
-      "BetMGM": 10.5,
-      "DraftKings": 10.5
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "coors": {
-    "away": "Cincinnati Reds",
-    "mktRuns": 12.0,
-    "impliedHR": 3.62,
-    "books": {
-      "FanDuel": 12.0,
-      "DraftKings": 12.0,
-      "BetMGM": 12.0
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "progressive": {
-    "away": "Pittsburgh Pirates",
-    "mktRuns": 7.5,
-    "impliedHR": 1.94,
-    "books": {
-      "FanDuel": 7.5,
-      "DraftKings": 7.5,
-      "BetMGM": 7.5
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "kauffman": {
-    "away": "San Diego Padres",
-    "mktRuns": 10.2,
-    "impliedHR": 2.58,
-    "books": {
-      "FanDuel": 10.0,
-      "DraftKings": 10.5,
-      "BetMGM": 10.0
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "truist": {
-    "away": "Texas Rangers",
-    "mktRuns": 8.0,
-    "impliedHR": 2.24,
-    "books": {
-      "FanDuel": 8.0,
-      "BetMGM": 8.0,
-      "DraftKings": 8.0
-    },
-    "asOf": "01:27 PM ET"
-  },
-  "angel": {
-    "away": "Detroit Tigers",
-    "mktRuns": 8.5,
-    "impliedHR": 2.14,
-    "books": {
-      "FanDuel": 8.5,
-      "DraftKings": 8.5,
-      "BetMGM": 8.5
-    },
-    "asOf": "01:27 PM ET"
-  }
-};
-const TODAY_DATE = '2026-07-17';
+const TODAY_ODDS = {"yankee": {"away": "Los Angeles Dodgers", "mktRuns": 9.0, "impliedHR": 2.59, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "04:27 PM ET"}, "fenway": {"away": "Tampa Bay Rays", "mktRuns": 9.0, "impliedHR": 2.37, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "04:27 PM ET"}, "wrigley": {"away": "Minnesota Twins", "mktRuns": 11.0, "impliedHR": 3.04, "books": {"FanDuel": 11.0, "BetMGM": 11.0, "DraftKings": 11.0}, "asOf": "04:27 PM ET"}, "coors": {"away": "Cincinnati Reds", "mktRuns": 12.0, "impliedHR": 3.62, "books": {"FanDuel": 12.0, "DraftKings": 12.0, "BetMGM": 12.0}, "asOf": "04:27 PM ET"}, "progressive": {"away": "Pittsburgh Pirates", "mktRuns": 7.5, "impliedHR": 1.94, "books": {"FanDuel": 7.5, "DraftKings": 7.5, "BetMGM": 7.5}, "asOf": "04:27 PM ET"}, "kauffman": {"away": "San Diego Padres", "mktRuns": 10.3, "impliedHR": 2.6, "books": {"FanDuel": 10.0, "DraftKings": 10.5, "BetMGM": 10.5}, "asOf": "04:27 PM ET"}, "truist": {"away": "Texas Rangers", "mktRuns": 8.0, "impliedHR": 2.24, "books": {"FanDuel": 8.0, "BetMGM": 8.0, "DraftKings": 8.0}, "asOf": "04:27 PM ET"}, "angel": {"away": "Detroit Tigers", "mktRuns": 8.5, "impliedHR": 2.14, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "04:27 PM ET"}};
+const TODAY_DATE = "2026-07-17";
 
 
 // ── Market Odds Section ──────────────────────────────────────────────────────
