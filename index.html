@@ -296,6 +296,22 @@
                     border-radius: 10px; width: 16px; height: 16px; line-height: 16px;
                     text-align: center; font-size: 0.58rem; font-weight: 800; margin-right: 4px; }
 
+
+    /* ── Market Odds Section ── */
+    .market-section { background: #fff8e1; padding: 12px 16px 14px; border-top: 2px solid #ffe082; }
+    .market-header  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+    .market-title   { font-size: 0.65rem; font-weight: 800; letter-spacing: 2px; color: #e65100; }
+    .market-asof    { font-size: 0.62rem; color: #aaa; font-family: 'Courier New', monospace; }
+    .market-table   { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
+    .market-table td { padding: 4px 6px; border-bottom: 1px solid #ffe082; color: #333; }
+    .market-table td.num { text-align: right; font-family: 'Courier New', monospace; font-weight: 700; }
+    .market-table tr:last-child td { border-bottom: none; }
+    .market-label   { font-size: 0.60rem; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .gap-pos { color: #2e7d32; font-weight: 800; }
+    .gap-neg { color: #c62828; font-weight: 800; }
+    .gap-neu { color: #888;    font-weight: 700; }
+    .no-game { font-size: 0.68rem; color: #aaa; text-align: center; padding: 8px; }
+
     .status-msg { color: #f48fb1; font-size: 0.82rem; text-align: center; margin-bottom: 10px; }
   </style>
 </head>
@@ -398,6 +414,9 @@
 // ── Pitcher Database ── Updated 2026-07-17 ──────────────────────────────────────
 // HR/9 = home runs allowed per 9 IP · MLB avg SP HR/9 (2026): 1.18
 // * = blended with prior estimate (IP < 40)
+// ── Pitcher Database ── Updated 2026-07-17 ──────────────────────────────────────
+// HR/9 = home runs allowed per 9 IP · MLB avg SP HR/9 (2026): 1.18
+// * = blended with prior estimate (IP < 40)
 const MLB_AVG_HR9 = 1.18; // 2026 MLB avg SP HR/9
 const PITCHERS = [
   // ARI
@@ -483,7 +502,7 @@ const PITCHERS = [
   {name:'Ronel Blanco', team:'HOU', hr9:0.95}, // stale
   {name:'Cristian Javier', team:'HOU', hr9:1.0}, // stale
   {name:'Peter Lambert', team:'HOU', hr9:1.15},
-  {name:'Hunter Brown', team:'HOU', hr9:1.22}, // *blended
+  {name:'Hunter Brown', team:'HOU', hr9:1.24}, // *blended
   {name:'Spencer Arrighetti', team:'HOU', hr9:1.32},
   {name:'Tatsuya Imai', team:'HOU', hr9:1.56},
   {name:'Lance McCullers Jr.', team:'HOU', hr9:1.6}, // *blended
@@ -497,7 +516,7 @@ const PITCHERS = [
   {name:'Patrick Sandoval', team:'LAA', hr9:0.85}, // stale
   {name:'José Soriano', team:'LAA', hr9:0.97},
   {name:'Reid Detmers', team:'LAA', hr9:1.1}, // stale
-  {name:'Grayson Rodriguez', team:'LAA', hr9:1.13}, // *blended
+  {name:'Grayson Rodriguez', team:'LAA', hr9:1.14}, // *blended
   {name:'Jack Kochanowicz', team:'LAA', hr9:1.2}, // stale
   {name:'Jose Suarez', team:'LAA', hr9:1.25}, // stale
   // LAD
@@ -559,7 +578,7 @@ const PITCHERS = [
   {name:'Braxton Ashcraft', team:'PIT', hr9:1.11},
   {name:'Mitch Keller', team:'PIT', hr9:1.13},
   {name:'Quinn Priester', team:'PIT', hr9:1.15}, // stale
-  {name:'Jared Jones', team:'PIT', hr9:1.24}, // *blended
+  {name:'Jared Jones', team:'PIT', hr9:1.26}, // *blended
   {name:'Marco Gonzales', team:'PIT', hr9:1.3}, // stale
   // SD
   {name:'Michael King', team:'SD', hr9:0.83},
@@ -825,6 +844,144 @@ function buildSensitivitySection(s) {
 
   html += '</tbody></table></div>';
   return html;
+}
+
+const TODAY_ODDS = {
+  "yankee": {
+    "away": "Los Angeles Dodgers",
+    "mktRuns": 9.0,
+    "impliedHR": 2.59,
+    "books": {
+      "FanDuel": 9.0,
+      "DraftKings": 9.0,
+      "BetMGM": 9.0
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "fenway": {
+    "away": "Tampa Bay Rays",
+    "mktRuns": 8.7,
+    "impliedHR": 2.29,
+    "books": {
+      "FanDuel": 9.0,
+      "DraftKings": 8.5,
+      "BetMGM": 8.5
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "wrigley": {
+    "away": "Minnesota Twins",
+    "mktRuns": 10.5,
+    "impliedHR": 2.9,
+    "books": {
+      "FanDuel": 10.5,
+      "BetMGM": 10.5,
+      "DraftKings": 10.5
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "coors": {
+    "away": "Cincinnati Reds",
+    "mktRuns": 12.0,
+    "impliedHR": 3.62,
+    "books": {
+      "FanDuel": 12.0,
+      "DraftKings": 12.0,
+      "BetMGM": 12.0
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "progressive": {
+    "away": "Pittsburgh Pirates",
+    "mktRuns": 7.5,
+    "impliedHR": 1.94,
+    "books": {
+      "FanDuel": 7.5,
+      "DraftKings": 7.5,
+      "BetMGM": 7.5
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "kauffman": {
+    "away": "San Diego Padres",
+    "mktRuns": 10.2,
+    "impliedHR": 2.58,
+    "books": {
+      "FanDuel": 10.0,
+      "DraftKings": 10.5,
+      "BetMGM": 10.0
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "truist": {
+    "away": "Texas Rangers",
+    "mktRuns": 8.0,
+    "impliedHR": 2.24,
+    "books": {
+      "FanDuel": 8.0,
+      "BetMGM": 8.0,
+      "DraftKings": 8.0
+    },
+    "asOf": "01:27 PM ET"
+  },
+  "angel": {
+    "away": "Detroit Tigers",
+    "mktRuns": 8.5,
+    "impliedHR": 2.14,
+    "books": {
+      "FanDuel": 8.5,
+      "DraftKings": 8.5,
+      "BetMGM": 8.5
+    },
+    "asOf": "01:27 PM ET"
+  }
+};
+const TODAY_DATE = '2026-07-17';
+
+
+// ── Market Odds Section ──────────────────────────────────────────────────────
+function buildMarketSection(stadiumKey, condHR) {
+  var today = new Date().toISOString().split('T')[0];
+  if (typeof TODAY_ODDS === 'undefined' || typeof TODAY_DATE === 'undefined'
+      || TODAY_DATE !== today || !TODAY_ODDS[stadiumKey]) {
+    return '<div class="section-label">📈 TODAY'S MARKET</div>' +
+           '<div class="market-section"><div class="no-game">No game today at this park · or odds not yet loaded</div></div>';
+  }
+
+  var od      = TODAY_ODDS[stadiumKey];
+  var implHR  = od.impliedHR;
+  var gap     = Math.round((condHR - implHR) * 100) / 100;
+  var gapStr  = (gap >= 0 ? '+' : '') + gap.toFixed(2);
+  var gapCls  = gap >  0.20 ? 'gap-pos' : gap < -0.20 ? 'gap-neg' : 'gap-neu';
+  var gapNote = gap >  0.20 ? 'Model above market' :
+                gap < -0.20 ? 'Market above model' : 'Model near market';
+
+  // Books string
+  var booksArr = [];
+  for (var b in od.books) booksArr.push(b + ': ' + od.books[b]);
+  var booksStr = booksArr.join(' · ');
+
+  return '<div class="section-label">📈 TODAY'S MARKET · ' + od.away.toUpperCase() + '</div>' +
+    '<div class="market-section">' +
+      '<div class="market-header">' +
+        '<span class="market-title">RUNS O/U vs IMPLIED HRs</span>' +
+        '<span class="market-asof">as of ' + od.asOf + '</span>' +
+      '</div>' +
+      '<table class="market-table">' +
+        '<tr><td><span class="market-label">Runs O/U (avg)</span></td>' +
+            '<td class="num">' + od.mktRuns + '</td>' +
+            '<td style="font-size:0.60rem;color:#aaa;padding-left:8px">' + booksStr + '</td></tr>' +
+        '<tr><td><span class="market-label">Market Implied HRs</span></td>' +
+            '<td class="num">' + implHR.toFixed(2) + '</td>' +
+            '<td style="font-size:0.60rem;color:#888;padding-left:8px">runs × park HR/R ratio</td></tr>' +
+        '<tr><td><span class="market-label">Model condHR</span></td>' +
+            '<td class="num">' + condHR.toFixed(2) + '</td>' +
+            '<td style="font-size:0.60rem;color:#888;padding-left:8px">weather + pitcher + park</td></tr>' +
+        '<tr><td><span class="market-label">Gap (Model − Market)</span></td>' +
+            '<td class="num"><span class="' + gapCls + '">' + gapStr + '</span></td>' +
+            '<td style="font-size:0.60rem;padding-left:8px"><span class="' + gapCls + '">' + gapNote + '</span></td></tr>' +
+      '</table>' +
+    '</div>';
 }
 
 // ── Stadium Registry ──────────────────────────────────────────────────────────
@@ -1426,6 +1583,8 @@ function generateCard() {
 
 
     buildSensitivitySection(s) +
+
+    buildMarketSection(key, condHR) +
 
     maxHRBlock(s) +
 
