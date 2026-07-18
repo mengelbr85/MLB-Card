@@ -321,7 +321,7 @@
 <p class="subtitle">All 21 open-air MLB stadiums · 2026 Pitcher HR/9 · Weather physics calibrated · 2022–2024</p>
 
 <div class="controls">
-  <select id="stadiumSelect" onchange="document.getElementById('card').classList.remove('visible')">
+  <select id="stadiumSelect" onchange="onStadiumChange(this.value)">
     <option value="">— Select a Stadium —</option>
     <option value="yankee">Yankee Stadium (NYY)</option>
     <option value="fenway">Fenway Park (BOS)</option>
@@ -420,6 +420,9 @@
 // ── Pitcher Database ── Updated 2026-07-17 ──────────────────────────────────────
 // HR/9 = home runs allowed per 9 IP · MLB avg SP HR/9 (2026): 1.18
 // * = blended with prior estimate (IP < 40)
+// Pitcher Database - Updated 2026-07-18
+// HR/9 = home runs allowed per 9 IP - MLB avg SP HR/9 (2026): 1.18
+// * = blended with prior estimate (IP < 40)
 const MLB_AVG_HR9 = 1.18; // 2026 MLB avg SP HR/9
 const PITCHERS = [
   // ARI
@@ -505,7 +508,7 @@ const PITCHERS = [
   {name:'Ronel Blanco', team:'HOU', hr9:0.95}, // stale
   {name:'Cristian Javier', team:'HOU', hr9:1.0}, // stale
   {name:'Peter Lambert', team:'HOU', hr9:1.15},
-  {name:'Hunter Brown', team:'HOU', hr9:1.25}, // *blended
+  {name:'Hunter Brown', team:'HOU', hr9:1.26}, // *blended
   {name:'Spencer Arrighetti', team:'HOU', hr9:1.32},
   {name:'Tatsuya Imai', team:'HOU', hr9:1.56},
   {name:'Lance McCullers Jr.', team:'HOU', hr9:1.6}, // *blended
@@ -581,7 +584,7 @@ const PITCHERS = [
   {name:'Braxton Ashcraft', team:'PIT', hr9:1.11},
   {name:'Mitch Keller', team:'PIT', hr9:1.13},
   {name:'Quinn Priester', team:'PIT', hr9:1.15}, // stale
-  {name:'Jared Jones', team:'PIT', hr9:1.27}, // *blended
+  {name:'Jared Jones', team:'PIT', hr9:1.28}, // *blended
   {name:'Marco Gonzales', team:'PIT', hr9:1.3}, // stale
   // SD
   {name:'Michael King', team:'SD', hr9:0.83},
@@ -849,8 +852,9 @@ function buildSensitivitySection(s) {
   return html;
 }
 
-const TODAY_ODDS = {"yankee": {"away": "Los Angeles Dodgers", "mktRuns": 9.0, "impliedHR": 2.59, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "04:27 PM ET"}, "fenway": {"away": "Tampa Bay Rays", "mktRuns": 9.0, "impliedHR": 2.37, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "04:27 PM ET"}, "wrigley": {"away": "Minnesota Twins", "mktRuns": 11.0, "impliedHR": 3.04, "books": {"FanDuel": 11.0, "BetMGM": 11.0, "DraftKings": 11.0}, "asOf": "04:27 PM ET"}, "coors": {"away": "Cincinnati Reds", "mktRuns": 12.0, "impliedHR": 3.62, "books": {"FanDuel": 12.0, "DraftKings": 12.0, "BetMGM": 12.0}, "asOf": "04:27 PM ET"}, "progressive": {"away": "Pittsburgh Pirates", "mktRuns": 7.5, "impliedHR": 1.94, "books": {"FanDuel": 7.5, "DraftKings": 7.5, "BetMGM": 7.5}, "asOf": "04:27 PM ET"}, "kauffman": {"away": "San Diego Padres", "mktRuns": 10.3, "impliedHR": 2.6, "books": {"FanDuel": 10.0, "DraftKings": 10.5, "BetMGM": 10.5}, "asOf": "04:27 PM ET"}, "truist": {"away": "Texas Rangers", "mktRuns": 8.0, "impliedHR": 2.24, "books": {"FanDuel": 8.0, "BetMGM": 8.0, "DraftKings": 8.0}, "asOf": "04:27 PM ET"}, "angel": {"away": "Detroit Tigers", "mktRuns": 8.5, "impliedHR": 2.14, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "04:27 PM ET"}};
-const TODAY_DATE = "2026-07-17";
+const TODAY_ODDS = {"yankee": {"away": "Los Angeles Dodgers", "mktRuns": 8.7, "impliedHR": 2.51, "books": {"FanDuel": 9.0, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "01:09 AM ET"}, "fenway": {"away": "Tampa Bay Rays", "mktRuns": 10.5, "impliedHR": 2.77, "books": {"FanDuel": 10.5, "DraftKings": 10.5, "BetMGM": 10.5}, "asOf": "01:09 AM ET"}, "wrigley": {"away": "Minnesota Twins", "mktRuns": 11.5, "impliedHR": 3.18, "books": {"FanDuel": 11.5, "BetMGM": 11.5, "DraftKings": 11.5}, "asOf": "01:09 AM ET"}, "coors": {"away": "Cincinnati Reds", "mktRuns": 12.5, "impliedHR": 3.77, "books": {"FanDuel": 12.5}, "asOf": "01:09 AM ET"}, "progressive": {"away": "Pittsburgh Pirates", "mktRuns": 7.5, "impliedHR": 1.94, "books": {"FanDuel": 7.5}, "asOf": "01:09 AM ET"}, "kauffman": {"away": "San Diego Padres", "mktRuns": 10.5, "impliedHR": 2.65, "books": {"FanDuel": 10.5}, "asOf": "01:09 AM ET"}, "citizens_bank": {"away": "New York Mets", "mktRuns": 8.5, "impliedHR": 2.35, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "01:09 AM ET"}, "truist": {"away": "Texas Rangers", "mktRuns": 10.5, "impliedHR": 2.94, "books": {"FanDuel": 10.5, "BetMGM": 10.5, "DraftKings": 10.5}, "asOf": "01:09 AM ET"}, "angel": {"away": "Detroit Tigers", "mktRuns": 8.5, "impliedHR": 2.14, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "01:09 AM ET"}};
+
+const TODAY_DATE = "2026-07-18";
 
 
 
@@ -882,6 +886,49 @@ function buildMarketSection(stadiumKey, condHR) {
   o += "<tr><td><span class=\"market-label\">Gap (Model - Market)</span></td><td class=\"num\"><span class=\"" + gapCls + "\">" + gapStr + "</span></td><td style=\"font-size:0.60rem;padding-left:8px\"><span class=\"" + gapCls + "\">" + gapNote + "</span></td></tr>";
   o += "</table></div>";
   return o;
+}
+
+const TODAY_WEATHER = {"progressive": {"temp": 84, "dew": 71, "wind": 12, "windDir": "W", "skyKey": "overcast", "forecast": "Showers And Thunderstorms", "pop": 94, "period": "2026-07-18T19:00", "firstPitch": "7:10 PM", "stadium": "Progressive Field"}, "wrigley": {"temp": 89, "dew": 72, "wind": 15, "windDir": "WNW", "skyKey": "overcast", "forecast": "Chance Showers And Thunderstorms", "pop": 38, "period": "2026-07-18T13:00", "firstPitch": "1:20 PM", "stadium": "Wrigley Field"}, "coors": {"temp": 90, "dew": 50, "wind": 6, "windDir": "E", "skyKey": "clear", "forecast": "Sunny", "pop": 0, "period": "2026-07-18T13:00", "firstPitch": "1:10 PM", "stadium": "Coors Field"}, "citizens_bank": {"temp": 88, "dew": 76, "wind": 10, "windDir": "S", "skyKey": "overcast", "forecast": "Showers And Thunderstorms Likely", "pop": 68, "period": "2026-07-18T16:00", "firstPitch": "4:05 PM", "stadium": "Citizens Bank Park"}, "kauffman": {"temp": 91, "dew": 72, "wind": 7, "windDir": "SSW", "skyKey": "clear", "forecast": "Mostly Sunny", "pop": 9, "period": "2026-07-18T15:00", "firstPitch": "3:10 PM", "stadium": "Kauffman Stadium"}, "fenway": {"temp": 80, "dew": 65, "wind": 20, "windDir": "SW", "skyKey": "scattered", "forecast": "Patchy Smoke", "pop": 67, "period": "2026-07-18T16:00", "firstPitch": "4:10 PM", "stadium": "Fenway Park"}, "truist": {"temp": 89, "dew": 74, "wind": 10, "windDir": "NW", "skyKey": "overcast", "forecast": "Slight Chance Showers And Thunderstorms", "pop": 20, "period": "2026-07-18T16:00", "firstPitch": "4:10 PM", "stadium": "Truist Park"}, "yankee": {"temp": 78, "dew": 73, "wind": 10, "windDir": "SW", "skyKey": "scattered", "forecast": "Patchy Smoke", "pop": 69, "period": "2026-07-18T20:00", "firstPitch": "8:08 PM", "stadium": "Yankee Stadium"}, "angel": {"temp": 80, "dew": 66, "wind": 5, "windDir": "SW", "skyKey": "clear", "forecast": "Mostly Clear", "pop": 0, "period": "2026-07-18T19:00", "firstPitch": "7:07 PM", "stadium": "Angel Stadium"}};
+const TODAY_WEATHER_DATE = "2026-07-18";
+
+// ── Weather Prefill from NWS ──────────────────────────────────────────────────
+function prefillWeather(stadiumKey) {
+ var statusEl = document.getElementById("statusMsg");
+ var today = new Date();
+ var todayStr = today.getFullYear() + "-" +
+   String(today.getMonth()+1).padStart(2,"0") + "-" +
+   String(today.getDate()).padStart(2,"0");
+ if (typeof TODAY_WEATHER === "undefined" || typeof TODAY_WEATHER_DATE === "undefined"
+     || TODAY_WEATHER_DATE !== todayStr || !TODAY_WEATHER[stadiumKey]) {
+   statusEl.textContent = "";
+   statusEl.style.color = "#f48fb1";
+   return;
+ }
+ var wx = TODAY_WEATHER[stadiumKey];
+ document.getElementById("w_temp").value = wx.temp;
+ document.getElementById("w_dew").value  = wx.dew;
+ document.getElementById("w_wind").value = wx.wind;
+ var dirSel = document.getElementById("w_dir");
+ for (var i = 0; i < dirSel.options.length; i++) {
+   if (dirSel.options[i].text === wx.windDir || dirSel.options[i].value === wx.windDir) {
+     dirSel.selectedIndex = i; break;
+   }
+ }
+ var skySel = document.getElementById("w_sky");
+ for (var i = 0; i < skySel.options.length; i++) {
+   if (skySel.options[i].value === wx.skyKey) {
+     skySel.selectedIndex = i; break;
+   }
+ }
+ statusEl.textContent = "\uD83C\uDF21\uFE0F NWS forecast pre-filled \u00B7 First pitch: "
+   + wx.firstPitch + " \u00B7 " + wx.forecast
+   + (wx.pop > 20 ? " \u00B7 " + wx.pop + "% precip chance" : "");
+ statusEl.style.color = "#4fc3f7";
+}
+
+function onStadiumChange(key) {
+ document.getElementById("card").classList.remove("visible");
+ prefillWeather(key);
 }
 
 // ── Stadium Registry ──────────────────────────────────────────────────────────
