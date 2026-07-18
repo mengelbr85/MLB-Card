@@ -853,49 +853,34 @@ const TODAY_ODDS = {"yankee": {"away": "Los Angeles Dodgers", "mktRuns": 9.0, "i
 const TODAY_DATE = "2026-07-17";
 
 
+
 // ── Market Odds Section ──────────────────────────────────────────────────────
 function buildMarketSection(stadiumKey, condHR) {
-  var today = new Date().toISOString().split('T')[0];
-  if (typeof TODAY_ODDS === 'undefined' || typeof TODAY_DATE === 'undefined'
-      || TODAY_DATE !== today || !TODAY_ODDS[stadiumKey]) {
-    return '<div class="section-label">📈 TODAY'S MARKET</div>' +
-           '<div class="market-section"><div class="no-game">No game today at this park · or odds not yet loaded</div></div>';
+  var today = new Date().toISOString().split("T")[0];
+  if (typeof TODAY_ODDS === "undefined" || typeof TODAY_DATE === "undefined" || TODAY_DATE !== today || !TODAY_ODDS[stadiumKey]) {
+    return "<div class=\"section-label\">\u{1F4C8} TODAY'S MARKET</div><div class=\"market-section\"><div class=\"no-game\">No game today at this park</div></div>";
   }
-
-  var od      = TODAY_ODDS[stadiumKey];
-  var implHR  = od.impliedHR;
-  var gap     = Math.round((condHR - implHR) * 100) / 100;
-  var gapStr  = (gap >= 0 ? '+' : '') + gap.toFixed(2);
-  var gapCls  = gap >  0.20 ? 'gap-pos' : gap < -0.20 ? 'gap-neg' : 'gap-neu';
-  var gapNote = gap >  0.20 ? 'Model above market' :
-                gap < -0.20 ? 'Market above model' : 'Model near market';
-
-  // Books string
+  var od = TODAY_ODDS[stadiumKey];
+  var gap = Math.round((condHR - od.impliedHR) * 100) / 100;
+  var gapStr = (gap >= 0 ? "+" : "") + gap.toFixed(2);
+  var gapCls = gap > 0.20 ? "gap-pos" : gap < -0.20 ? "gap-neg" : "gap-neu";
+  var gapNote = gap > 0.20 ? "Model above market" : gap < -0.20 ? "Market above model" : "Model near market";
   var booksArr = [];
-  for (var b in od.books) booksArr.push(b + ': ' + od.books[b]);
-  var booksStr = booksArr.join(' · ');
-
-  return '<div class="section-label">📈 TODAY'S MARKET · ' + od.away.toUpperCase() + '</div>' +
-    '<div class="market-section">' +
-      '<div class="market-header">' +
-        '<span class="market-title">RUNS O/U vs IMPLIED HRs</span>' +
-        '<span class="market-asof">as of ' + od.asOf + '</span>' +
-      '</div>' +
-      '<table class="market-table">' +
-        '<tr><td><span class="market-label">Runs O/U (avg)</span></td>' +
-            '<td class="num">' + od.mktRuns + '</td>' +
-            '<td style="font-size:0.60rem;color:#aaa;padding-left:8px">' + booksStr + '</td></tr>' +
-        '<tr><td><span class="market-label">Market Implied HRs</span></td>' +
-            '<td class="num">' + implHR.toFixed(2) + '</td>' +
-            '<td style="font-size:0.60rem;color:#888;padding-left:8px">runs × park HR/R ratio</td></tr>' +
-        '<tr><td><span class="market-label">Model condHR</span></td>' +
-            '<td class="num">' + condHR.toFixed(2) + '</td>' +
-            '<td style="font-size:0.60rem;color:#888;padding-left:8px">weather + pitcher + park</td></tr>' +
-        '<tr><td><span class="market-label">Gap (Model − Market)</span></td>' +
-            '<td class="num"><span class="' + gapCls + '">' + gapStr + '</span></td>' +
-            '<td style="font-size:0.60rem;padding-left:8px"><span class="' + gapCls + '">' + gapNote + '</span></td></tr>' +
-      '</table>' +
-    '</div>';
+  for (var b in od.books) { booksArr.push(b + ": " + od.books[b]); }
+  var o = "";
+  o += "<div class=\"section-label\">\u{1F4C8} TODAY'S MARKET \u00B7 " + od.away.toUpperCase() + "</div>";
+  o += "<div class=\"market-section\">";
+  o += "<div class=\"market-header\">";
+  o += "<span class=\"market-title\">RUNS O/U vs IMPLIED HRs</span>";
+  o += "<span class=\"market-asof\">as of " + od.asOf + "</span>";
+  o += "</div>";
+  o += "<table class=\"market-table\">";
+  o += "<tr><td><span class=\"market-label\">Runs O/U (avg)</span></td><td class=\"num\">" + od.mktRuns + "</td><td style=\"font-size:0.60rem;color:#aaa;padding-left:8px\">" + booksArr.join(" / ") + "</td></tr>";
+  o += "<tr><td><span class=\"market-label\">Market Implied HRs</span></td><td class=\"num\">" + od.impliedHR.toFixed(2) + "</td><td style=\"font-size:0.60rem;color:#888;padding-left:8px\">runs x park HR/R ratio</td></tr>";
+  o += "<tr><td><span class=\"market-label\">Model condHR</span></td><td class=\"num\">" + condHR.toFixed(2) + "</td><td style=\"font-size:0.60rem;color:#888;padding-left:8px\">weather + pitcher + park</td></tr>";
+  o += "<tr><td><span class=\"market-label\">Gap (Model - Market)</span></td><td class=\"num\"><span class=\"" + gapCls + "\">" + gapStr + "</span></td><td style=\"font-size:0.60rem;padding-left:8px\"><span class=\"" + gapCls + "\">" + gapNote + "</span></td></tr>";
+  o += "</table></div>";
+  return o;
 }
 
 // ── Stadium Registry ──────────────────────────────────────────────────────────
