@@ -857,7 +857,7 @@ const TODAY_DATE = "2026-07-17";
 
 // ── Market Odds Section ──────────────────────────────────────────────────────
 function buildMarketSection(stadiumKey, condHR) {
-  var today = new Date().toISOString().split("T")[0];
+  var d = new Date(); var today = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
   if (typeof TODAY_ODDS === "undefined" || typeof TODAY_DATE === "undefined" || TODAY_DATE !== today || !TODAY_ODDS[stadiumKey]) {
     return "<div class=\"section-label\">\u{1F4C8} TODAY'S MARKET</div><div class=\"market-section\"><div class=\"no-game\">No game today at this park</div></div>";
   }
