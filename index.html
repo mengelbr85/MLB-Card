@@ -861,7 +861,6 @@ const TODAY_DATE = "2026-07-18";
 
 // ── Market Odds Section ──────────────────────────────────────────────────────
 function buildMarketSection(stadiumKey, condHR) {
-  var d = new Date(); var today = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
   if (typeof TODAY_ODDS === "undefined" || typeof TODAY_DATE === "undefined" || TODAY_DATE !== today || !TODAY_ODDS[stadiumKey]) {
     return "<div class=\"section-label\">\u{1F4C8} TODAY'S MARKET</div><div class=\"market-section\"><div class=\"no-game\">No game today at this park</div></div>";
   }
@@ -898,8 +897,7 @@ function prefillWeather(stadiumKey) {
  var todayStr = today.getFullYear() + "-" +
    String(today.getMonth()+1).padStart(2,"0") + "-" +
    String(today.getDate()).padStart(2,"0");
- if (typeof TODAY_WEATHER === "undefined" || typeof TODAY_WEATHER_DATE === "undefined"
-     || TODAY_WEATHER_DATE !== todayStr || !TODAY_WEATHER[stadiumKey]) {
+ if (typeof TODAY_WEATHER === "undefined" || !TODAY_WEATHER[stadiumKey]) {
    statusEl.textContent = "";
    statusEl.style.color = "#f48fb1";
    return;
