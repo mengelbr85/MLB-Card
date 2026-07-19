@@ -426,6 +426,9 @@
 // Pitcher Database - Updated 2026-07-18
 // HR/9 = home runs allowed per 9 IP - MLB avg SP HR/9 (2026): 1.18
 // * = blended with prior estimate (IP < 40)
+// Pitcher Database - Updated 2026-07-19
+// HR/9 = home runs allowed per 9 IP - MLB avg SP HR/9 (2026): 1.18
+// * = blended with prior estimate (IP < 40)
 const MLB_AVG_HR9 = 1.18; // 2026 MLB avg SP HR/9
 const PITCHERS = [
   // ARI
@@ -445,7 +448,7 @@ const PITCHERS = [
   {name:'Reynaldo Lopez', team:'ATL', hr9:1.0}, // stale
   {name:'AJ Smith-Shawver', team:'ATL', hr9:1.1}, // stale
   {name:'Charlie Morton', team:'ATL', hr9:1.15}, // stale
-  {name:'JR Ritchie', team:'ATL', hr9:1.28},
+  {name:'JR Ritchie', team:'ATL', hr9:1.25},
   {name:'Bryce Elder', team:'ATL', hr9:1.31},
   {name:'Grant Holmes', team:'ATL', hr9:1.55},
   // BAL
@@ -473,8 +476,8 @@ const PITCHERS = [
   {name:'Chase Burns', team:'CIN', hr9:1.05},
   {name:'Hunter Greene', team:'CIN', hr9:1.05}, // stale
   {name:'Nick Lodolo', team:'CIN', hr9:1.1}, // stale
+  {name:'Rhett Lowder', team:'CIN', hr9:1.12},
   {name:'Andrew Abbott', team:'CIN', hr9:1.15}, // stale
-  {name:'Rhett Lowder', team:'CIN', hr9:1.16},
   {name:'Graham Ashcraft', team:'CIN', hr9:1.2}, // stale
   {name:'Brady Singer', team:'CIN', hr9:1.96},
   // CLE
@@ -482,7 +485,7 @@ const PITCHERS = [
   {name:'Logan Allen', team:'CLE', hr9:1.1}, // stale
   {name:'Ben Lively', team:'CLE', hr9:1.15}, // stale
   {name:'Slade Cecconi', team:'CLE', hr9:1.18},
-  {name:'Gavin Williams', team:'CLE', hr9:1.35},
+  {name:'Gavin Williams', team:'CLE', hr9:1.51},
   {name:'Tanner Bibee', team:'CLE', hr9:1.59},
   // COL
   {name:'Michael Lorenzen', team:'COL', hr9:1.3},
@@ -491,8 +494,9 @@ const PITCHERS = [
   {name:'German Marquez', team:'COL', hr9:1.45}, // stale
   {name:'Austin Gomber', team:'COL', hr9:1.5}, // stale
   {name:'Ryan Feltner', team:'COL', hr9:1.56},
+  {name:'Tomoyuki Sugano', team:'COL', hr9:1.79},
   // CWS
-  {name:'Davis Martin', team:'CWS', hr9:0.54},
+  {name:'Davis Martin', team:'CWS', hr9:0.51},
   {name:'Garrett Crochet', team:'CWS', hr9:0.85}, // stale
   {name:'Erick Fedde', team:'CWS', hr9:1.1}, // stale
   {name:'Sean Burke', team:'CWS', hr9:1.11},
@@ -511,8 +515,8 @@ const PITCHERS = [
   {name:'Ronel Blanco', team:'HOU', hr9:0.95}, // stale
   {name:'Cristian Javier', team:'HOU', hr9:1.0}, // stale
   {name:'Peter Lambert', team:'HOU', hr9:1.08},
+  {name:'Spencer Arrighetti', team:'HOU', hr9:1.24},
   {name:'Hunter Brown', team:'HOU', hr9:1.26}, // *blended
-  {name:'Spencer Arrighetti', team:'HOU', hr9:1.32},
   {name:'Tatsuya Imai', team:'HOU', hr9:1.56},
   {name:'Lance McCullers Jr.', team:'HOU', hr9:1.6}, // *blended
   // KC
@@ -525,8 +529,8 @@ const PITCHERS = [
   {name:'Patrick Sandoval', team:'LAA', hr9:0.85}, // stale
   {name:'José Soriano', team:'LAA', hr9:0.97},
   {name:'Reid Detmers', team:'LAA', hr9:1.1}, // stale
-  {name:'Grayson Rodriguez', team:'LAA', hr9:1.15}, // *blended
   {name:'Jack Kochanowicz', team:'LAA', hr9:1.2}, // stale
+  {name:'Grayson Rodriguez', team:'LAA', hr9:1.22}, // *blended
   {name:'Jose Suarez', team:'LAA', hr9:1.25}, // stale
   // LAD
   {name:'Shohei Ohtani', team:'LAD', hr9:0.42},
@@ -536,8 +540,8 @@ const PITCHERS = [
   {name:'Emmet Sheehan', team:'LAD', hr9:1.64},
   {name:'Roki Sasaki', team:'LAD', hr9:1.97},
   // MIA
+  {name:'Max Meyer', team:'MIA', hr9:0.89},
   {name:'Sandy Alcantara', team:'MIA', hr9:0.92},
-  {name:'Max Meyer', team:'MIA', hr9:0.92},
   {name:'Jesus Luzardo', team:'MIA', hr9:1.05}, // stale
   {name:'Braxton Garrett', team:'MIA', hr9:1.1}, // stale
   {name:'Edward Cabrera', team:'MIA', hr9:1.15}, // stale
@@ -545,8 +549,8 @@ const PITCHERS = [
   {name:'Janson Junk', team:'MIA', hr9:1.25},
   {name:'Eury Pérez', team:'MIA', hr9:1.37},
   // MIL
-  {name:'Logan Henderson', team:'MIL', hr9:0.72}, // *blended
   {name:'Jacob Misiorowski', team:'MIL', hr9:0.73},
+  {name:'Logan Henderson', team:'MIL', hr9:0.76}, // *blended
   {name:'Robert Gasser', team:'MIL', hr9:1.05}, // stale
   {name:'Tobias Myers', team:'MIL', hr9:1.15}, // stale
   {name:'Aaron Civale', team:'MIL', hr9:1.25}, // stale
@@ -554,7 +558,7 @@ const PITCHERS = [
   // MIN
   {name:'Pablo Lopez', team:'MIN', hr9:0.8}, // stale
   {name:'Joe Ryan', team:'MIN', hr9:0.82},
-  {name:'Taj Bradley', team:'MIN', hr9:1.31},
+  {name:'Taj Bradley', team:'MIN', hr9:1.34},
   {name:'Bailey Ober', team:'MIN', hr9:1.52},
   {name:'Simeon Woods Richardson', team:'MIN', hr9:1.7},
   {name:'Zebby Matthews', team:'MIN', hr9:1.88},
@@ -567,7 +571,7 @@ const PITCHERS = [
   {name:'Sean Manaea', team:'NYM', hr9:1.2}, // stale
   {name:'Freddy Peralta', team:'NYM', hr9:1.29},
   {name:'Tylor Megill', team:'NYM', hr9:1.3}, // stale
-  {name:'Kodai Senga', team:'NYM', hr9:2.75}, // *blended
+  {name:'Kodai Senga', team:'NYM', hr9:2.66},
   // NYY
   {name:'Max Fried', team:'NYY', hr9:0.15}, // stale
   {name:'Carlos Rodon', team:'NYY', hr9:0.58}, // stale
@@ -585,9 +589,9 @@ const PITCHERS = [
   {name:'Paul Skenes', team:'PIT', hr9:0.91},
   {name:'Bubba Chandler', team:'PIT', hr9:0.95},
   {name:'Braxton Ashcraft', team:'PIT', hr9:1.11},
+  {name:'Jared Jones', team:'PIT', hr9:1.12},
   {name:'Mitch Keller', team:'PIT', hr9:1.13},
   {name:'Quinn Priester', team:'PIT', hr9:1.15}, // stale
-  {name:'Jared Jones', team:'PIT', hr9:1.28}, // *blended
   {name:'Marco Gonzales', team:'PIT', hr9:1.3}, // stale
   // SD
   {name:'Michael King', team:'SD', hr9:0.87},
@@ -595,18 +599,18 @@ const PITCHERS = [
   {name:'Yu Darvish', team:'SD', hr9:0.95}, // stale
   {name:'Randy Vasquez', team:'SD', hr9:1.2}, // stale
   {name:'Walker Buehler', team:'SD', hr9:1.21},
-  {name:'Griffin Canning', team:'SD', hr9:1.29},
+  {name:'Griffin Canning', team:'SD', hr9:1.37},
   {name:'Germán Márquez', team:'SD', hr9:2.16},
   // SEA
-  {name:'Bryan Woo', team:'SEA', hr9:0.86},
   {name:'George Kirby', team:'SEA', hr9:0.9},
+  {name:'Bryan Woo', team:'SEA', hr9:0.98},
   {name:'Emerson Hancock', team:'SEA', hr9:1.09},
   {name:'Logan Gilbert', team:'SEA', hr9:1.11},
   {name:'Luis Castillo', team:'SEA', hr9:1.23},
   {name:'Bryce Miller', team:'SEA', hr9:1.28},
   // SF
   {name:'Landen Roupp', team:'SF', hr9:0.61},
-  {name:'Logan Webb', team:'SF', hr9:0.72},
+  {name:'Logan Webb', team:'SF', hr9:0.76},
   {name:'Trevor McDonald', team:'SF', hr9:0.81},
   {name:'Kyle Harrison', team:'SF', hr9:1.05}, // stale
   {name:'Hayden Birdsong', team:'SF', hr9:1.1}, // stale
@@ -615,7 +619,7 @@ const PITCHERS = [
   {name:'Tyler Mahle', team:'SF', hr9:1.38},
   {name:'Adrian Houser', team:'SF', hr9:1.46},
   // STL
-  {name:'Dustin May', team:'STL', hr9:0.68},
+  {name:'Dustin May', team:'STL', hr9:0.64},
   {name:'Andre Pallante', team:'STL', hr9:0.9},
   {name:'Kyle Leahy', team:'STL', hr9:0.91},
   {name:'Miles Mikolas', team:'STL', hr9:1.05}, // stale
@@ -652,7 +656,7 @@ const PITCHERS = [
   {name:'Jake Irvin', team:'WSH', hr9:1.15}, // stale
   {name:'Trevor Williams', team:'WSH', hr9:1.25}, // stale
   {name:'Patrick Corbin', team:'WSH', hr9:1.6}, // stale
-  {name:'Zack Littell', team:'WSH', hr9:2.3},
+  {name:'Zack Littell', team:'WSH', hr9:2.34},
 ];
 
 // Populate pitcher dropdowns on page load
@@ -855,7 +859,7 @@ function buildSensitivitySection(s) {
   return html;
 }
 
-const TODAY_ODDS = {"progressive": {"away": "Pittsburgh Pirates", "mktRuns": 8.2, "impliedHR": 2.12, "books": {"DraftKings": 8.0, "BetMGM": 8.5, "FanDuel": 8.0}, "asOf": "03:06 PM ET"}, "wrigley": {"away": "Minnesota Twins", "mktRuns": 8.7, "impliedHR": 2.4, "books": {"FanDuel": 9.0, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "03:06 PM ET"}, "coors": {"away": "Cincinnati Reds", "mktRuns": 12.5, "impliedHR": 3.77, "books": {"FanDuel": 12.5, "DraftKings": 12.5, "BetMGM": 12.5}, "asOf": "03:06 PM ET"}, "citizens_bank": {"away": "New York Mets", "mktRuns": 8.5, "impliedHR": 2.35, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "03:06 PM ET"}, "truist": {"away": "Texas Rangers", "mktRuns": 9.0, "impliedHR": 2.52, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "03:06 PM ET"}, "fenway": {"away": "Tampa Bay Rays", "mktRuns": 9.5, "impliedHR": 2.5, "books": {"FanDuel": 9.5, "DraftKings": 9.5, "BetMGM": 9.5}, "asOf": "03:06 PM ET"}, "kauffman": {"away": "San Diego Padres", "mktRuns": 11.0, "impliedHR": 2.78, "books": {"FanDuel": 11.0, "DraftKings": 11.0, "BetMGM": 11.0}, "asOf": "03:06 PM ET"}, "yankee": {"away": "Los Angeles Dodgers", "mktRuns": 9.0, "impliedHR": 2.59, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "03:06 PM ET"}, "angel": {"away": "Detroit Tigers", "mktRuns": 8.0, "impliedHR": 2.02, "books": {"FanDuel": 8.0, "DraftKings": 8.0, "BetMGM": 8.0}, "asOf": "03:06 PM ET"}};
+const TODAY_ODDS = {"yankee": {"away": "Los Angeles Dodgers", "mktRuns": 9.0, "impliedHR": 2.59, "books": {"FanDuel": 9.0, "DraftKings": 9.0, "BetMGM": 9.0}, "asOf": "03:53 PM ET"}, "truist": {"away": "Texas Rangers", "mktRuns": 8.5, "impliedHR": 2.38, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "03:53 PM ET"}, "fenway": {"away": "Tampa Bay Rays", "mktRuns": 8.5, "impliedHR": 2.24, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "03:53 PM ET"}, "citizens_bank": {"away": "New York Mets", "mktRuns": 8.5, "impliedHR": 2.35, "books": {"FanDuel": 8.5, "DraftKings": 8.5, "BetMGM": 8.5}, "asOf": "03:53 PM ET"}, "progressive": {"away": "Pittsburgh Pirates", "mktRuns": 7.0, "impliedHR": 1.81, "books": {"FanDuel": 7.0, "DraftKings": 7.0, "BetMGM": 7.0}, "asOf": "03:53 PM ET"}, "kauffman": {"away": "San Diego Padres", "mktRuns": 9.7, "impliedHR": 2.45, "books": {"FanDuel": 9.5, "DraftKings": 9.5, "BetMGM": 10.0}, "asOf": "03:53 PM ET"}, "wrigley": {"away": "Minnesota Twins", "mktRuns": 7.5, "impliedHR": 2.07, "books": {"FanDuel": 7.5, "DraftKings": 7.5, "BetMGM": 7.5}, "asOf": "03:53 PM ET"}, "coors": {"away": "Cincinnati Reds", "mktRuns": 11.0, "impliedHR": 3.31, "books": {"FanDuel": 11.0, "DraftKings": 11.0, "BetMGM": 11.0}, "asOf": "03:53 PM ET"}, "angel": {"away": "Detroit Tigers", "mktRuns": 9.5, "impliedHR": 2.39, "books": {"FanDuel": 9.5, "DraftKings": 9.5, "BetMGM": 9.5}, "asOf": "03:53 PM ET"}};
 
 const TODAY_DATE = "2026-07-18";
 
@@ -890,7 +894,7 @@ function buildMarketSection(stadiumKey, condHR) {
   return o;
 }
 
-const TODAY_WEATHER = {"progressive": {"temp": 85, "dew": 72, "wind": 12, "windDir": "W", "skyKey": "overcast", "forecast": "Showers And Thunderstorms Likely", "pop": 63, "period": "2026-07-18T19:00", "firstPitch": "7:10 PM", "stadium": "Progressive Field"}, "wrigley": {"temp": 87, "dew": 74, "wind": 15, "windDir": "WNW", "skyKey": "overcast", "forecast": "Chance Showers And Thunderstorms", "pop": 48, "period": "2026-07-18T13:00", "firstPitch": "1:20 PM", "stadium": "Wrigley Field"}, "coors": {"temp": 89, "dew": 50, "wind": 6, "windDir": "ENE", "skyKey": "clear", "forecast": "Sunny", "pop": 0, "period": "2026-07-18T13:00", "firstPitch": "1:10 PM", "stadium": "Coors Field"}, "citizens_bank": {"temp": 86, "dew": 75, "wind": 10, "windDir": "SW", "skyKey": "overcast", "forecast": "Areas Of Smoke", "pop": 87, "period": "2026-07-18T16:00", "firstPitch": "4:05 PM", "stadium": "Citizens Bank Park"}, "kauffman": {"temp": 91, "dew": 71, "wind": 7, "windDir": "SSW", "skyKey": "overcast", "forecast": "Slight Chance Showers And Thunderstorms", "pop": 20, "period": "2026-07-18T15:00", "firstPitch": "3:10 PM", "stadium": "Kauffman Stadium"}, "fenway": {"temp": 81, "dew": 69, "wind": 20, "windDir": "SW", "skyKey": "overcast", "forecast": "Smoke", "pop": 39, "period": "2026-07-18T16:00", "firstPitch": "4:10 PM", "stadium": "Fenway Park"}, "truist": {"temp": 89, "dew": 75, "wind": 10, "windDir": "NW", "skyKey": "overcast", "forecast": "Slight Chance Showers And Thunderstorms", "pop": 19, "period": "2026-07-18T16:00", "firstPitch": "4:10 PM", "stadium": "Truist Park"}, "yankee": {"temp": 75, "dew": 72, "wind": 12, "windDir": "SW", "skyKey": "overcast", "forecast": "Showers And Thunderstorms Likely", "pop": 71, "period": "2026-07-18T20:00", "firstPitch": "8:08 PM", "stadium": "Yankee Stadium"}, "angel": {"temp": 79, "dew": 66, "wind": 5, "windDir": "SW", "skyKey": "clear", "forecast": "Mostly Clear", "pop": 1, "period": "2026-07-18T19:00", "firstPitch": "7:07 PM", "stadium": "Angel Stadium"}};
+const TODAY_WEATHER = {"yankee": {"temp": 78, "dew": 53, "wind": 7, "windDir": "NW", "skyKey": "clear", "forecast": "Clear", "pop": 0, "period": "2026-07-19T19:00", "firstPitch": "7:20 PM", "stadium": "Yankee Stadium"}, "fenway": {"temp": 77, "dew": 53, "wind": 14, "windDir": "NW", "skyKey": "clear", "forecast": "Sunny", "pop": 0, "period": "2026-07-19T13:00", "firstPitch": "1:35 PM", "stadium": "Fenway Park"}, "citizens_bank": {"temp": 81, "dew": 61, "wind": 15, "windDir": "N", "skyKey": "clear", "forecast": "Sunny", "pop": 0, "period": "2026-07-19T13:00", "firstPitch": "1:35 PM", "stadium": "Citizens Bank Park"}, "truist": {"temp": 89, "dew": 75, "wind": 5, "windDir": "W", "skyKey": "clear", "forecast": "Mostly Sunny", "pop": 13, "period": "2026-07-19T13:00", "firstPitch": "1:35 PM", "stadium": "Truist Park"}, "progressive": {"temp": 76, "dew": 61, "wind": 10, "windDir": "N", "skyKey": "overcast", "forecast": "Areas Of Smoke", "pop": 0, "period": "2026-07-19T13:00", "firstPitch": "1:40 PM", "stadium": "Progressive Field"}, "kauffman": {"temp": 90, "dew": 74, "wind": 3, "windDir": "E", "skyKey": "overcast", "forecast": "Chance Showers And Thunderstorms", "pop": 37, "period": "2026-07-19T13:00", "firstPitch": "1:10 PM", "stadium": "Kauffman Stadium"}, "wrigley": {"temp": 75, "dew": 62, "wind": 10, "windDir": "ENE", "skyKey": "overcast", "forecast": "Patchy Smoke", "pop": 0, "period": "2026-07-19T13:00", "firstPitch": "1:20 PM", "stadium": "Wrigley Field"}, "coors": {"temp": 93, "dew": 47, "wind": 5, "windDir": "E", "skyKey": "clear", "forecast": "Sunny", "pop": 0, "period": "2026-07-19T13:00", "firstPitch": "1:10 PM", "stadium": "Coors Field"}, "angel": {"temp": 83, "dew": 66, "wind": 10, "windDir": "SW", "skyKey": "clear", "forecast": "Sunny", "pop": 2, "period": "2026-07-19T13:00", "firstPitch": "1:07 PM", "stadium": "Angel Stadium"}};
 const TODAY_WEATHER_DATE = "2026-07-18";
 
 // ── Weather Prefill from NWS ──────────────────────────────────────────────────
